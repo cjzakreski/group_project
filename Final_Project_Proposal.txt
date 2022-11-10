@@ -1,0 +1,50 @@
+Selby Heyman, Abigail Wallace, Cameron Zakreski
+CPSC 240
+Finlayson
+Final Project Proposal
+
+
+Name of the Project: Hangman
+Goal of the Project: To complete a working hangman game program. 
+Features (+ brief descriptions):
+	•Categories (read from .txt files)
+		◦Animals
+		◦Colors
+		◦Food
+		◦Countries
+		◦Sports
+		◦Hobbies
+		◦UMW (General - buildings, professors, traditions, etc.)
+		◦Challenge
+	•Guesses
+		◦Keep a running list of number of guesses used for high scores
+		◦Letter
+			▪Get charAt(0) from text box
+			▪If string length is more than 1, int, or special char error message to enter a new guess
+			▪For each appearance of letter, replace the underline with that letter using labels 
+			▪If no appearances add it to a list of wrong letters and add a limb to the person
+		◦Word
+			▪Same text box, but with no mismatch exception 
+			▪If the word is not the same as the hidden word, add a limb
+			▪User does not get to know which letter(s) is/are wrong 
+	•High Scores
+		◦File with top 5 scores with names of players and category played
+		◦User will enter name at program startup
+		◦If there are high scores, rip them to an ArrayList of score objects
+			▪Score object will have player name, score, and category as instance variables
+		◦At start of program, high scores will be displayed from lowest to highest average guess per length
+		◦Score class
+			▪Take the number of guesses used and number of latter in the word and divide then multiply by 100 for the score
+			▪Closest to 100 or under 100 are better scores than higher than 100
+			▪When the player is done guessing, if successful a new score object is created
+			▪Compare to high scores already existing and if higher, replace and then erase high score file & write the array list of high scores to the high score file
+	•Hangman Display
+		◦Permanent gallows independent of categories 
+		◦For hangman:
+			▪Either add images of hangman with one more limb each time
+			▪Or draw a new limb each time 
+			▪(We’re not sure which one will be better)
+			▪Labels to display underscores for unknown letters
+			▪These labels will be replaced when correct letters are guessed
+			▪Labels next to the gallows to display wrong guesses
+			▪When full words are guessed, no incorrect letters are added here
