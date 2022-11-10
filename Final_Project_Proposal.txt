@@ -26,12 +26,12 @@ Features (+ brief descriptions):
 		◦Letter
 			▪Get charAt(0) from text box
 			▪If string length is more than 1, int, or special char error message to enter a new guess
-			▪For each appearance of letter, replace the underline with that letter using labels 
+			▪For each appearance of letter, replace the underline with that letter using labels
 			▪If no appearances add it to a list of wrong letters and add a limb to the person
 		◦Word
-			▪Same text box, but with no mismatch exception 
+			▪Same text box, but with no mismatch exception
 			▪If the word is not the same as the hidden word, add a limb
-			▪User does not get to know which letter(s) is/are wrong 
+			▪User does not get to know which letter(s) is/are wrong
 	•High Scores (write to a .txt file)
 		◦All high scores will start with a blank name (single space character), a score of zero, and a category of null
 		◦File with top 5 scores with names of players and category played
@@ -45,10 +45,10 @@ Features (+ brief descriptions):
 			▪When the player is done guessing, if successful a new score object is created
 			▪Compare to high scores already existing and if higher, replace and then erase high score file & write the array list of high scores to the high score file
 	•Hangman Display
-		◦Permanent gallows independent of categories 
+		◦Permanent gallows independent of categories
 		◦For hangman:
 			▪Either add images of hangman with one more limb each time
-			▪Or draw a new limb each time 
+			▪Or draw a new limb each time
 			▪(We’re not sure which one will be better)
 			▪Labels to display underscores for unknown letters
 			▪These labels will be replaced when correct letters are guessed
