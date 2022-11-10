@@ -5,7 +5,7 @@ Final Project Proposal
 
 
 Name of the Project: Hangman
-Goal of the Project: To complete a working hangman game program. 
+Goal of the Project: To build a fully functional single player hangman game with words in a selection of categories and a running list of high scores for the entire history of the program. 
 Features (+ brief descriptions):
 	•Categories (read from .txt files)
 		◦Animals
@@ -27,7 +27,8 @@ Features (+ brief descriptions):
 			▪Same text box, but with no mismatch exception 
 			▪If the word is not the same as the hidden word, add a limb
 			▪User does not get to know which letter(s) is/are wrong 
-	•High Scores
+	•High Scores (write to a .txt file)
+		◦All high scores will start with a blank name (single space character), a score of zero, and a category of null
 		◦File with top 5 scores with names of players and category played
 		◦User will enter name at program startup
 		◦If there are high scores, rip them to an ArrayList of score objects
