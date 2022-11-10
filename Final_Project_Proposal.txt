@@ -5,7 +5,12 @@ Final Project Proposal
 
 
 Name of the Project: Hangman
-Goal of the Project: To build a fully functional single player hangman game with words in a selection of categories and a running list of high scores for the entire history of the program. 
+Goal of the Project: To build a fully functional single player hangman game with words in a selection of categories and a running list of high scores for
+the entire history of the program. The program will catch all user input errors such as more than one letter guess at a time (unless the user is guessing a
+full word) and invalid input such as numbers, whitespace characters, or special characters. Wrong full word guesses will result in adding a limb to the 
+person but will not display the incorrect letters within the word. Single letter guesses which are incorrect will add a limb and the letter will show up in
+an incorrect letter bank. If the word is successfully guessed before the hangman is complete, the program will calculate the guess count in relation to the 
+number of characters in the word and determine whether this average is low enough to ber included in the high score list and add it when appropriate.
 Features (+ brief descriptions):
 	•Categories (read from .txt files)
 		◦Animals
