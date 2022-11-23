@@ -1,0 +1,50 @@
+burger
+sandwich
+sausage
+french fries
+pasta
+pickles
+tomato
+asparagus
+jalapeno
+brussels sprouts
+seaweed
+lo mein
+dumplings
+bok choy
+edamame
+chocolate
+pretzel
+doughnut
+pancakes
+croissant
+macarons
+oatmeal
+poutine
+ceviche
+falafel
+lasagna
+sushi
+kimchi
+pad thai
+french toast
+graham crackers
+quesadilla
+waffles
+zucchini
+pepperoni
+ratatouille
+cucumber
+dragonfruit
+potato
+wasabi
+yogurt
+ice cream
+cheesecake
+enchilada
+popcorn
+mayonnaise
+raspberries
+strawberries
+watermelon
+macadamia nuts

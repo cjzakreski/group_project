@@ -1,0 +1,50 @@
+red
+orange
+yellow
+green
+blue
+purple
+indigo
+violet
+pink
+gray
+brown
+black
+white
+tan
+silver
+gold
+bronze
+coral
+olive
+maroon
+peach
+teal
+burgundy
+cyan
+mauve
+magenta
+turquoise
+charcoal
+beige
+cream
+lavender
+taupe
+aquamarine
+khaki
+ivory
+champagne
+ultramarine
+fuchsia
+periwinkle
+cerulean
+plum
+cornflower blue
+apricot
+mint green
+burnt orange
+emerald
+celestial gray
+slate gray
+almond
+peacock blue

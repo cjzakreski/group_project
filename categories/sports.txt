@@ -1,0 +1,50 @@
+soccer
+basketball
+tennis
+baseball
+golf
+track
+volleyball
+badminton
+swimming
+boxing
+table tennis
+skiing
+roller skating
+cricket
+rugby
+pool
+darts
+football
+bowling
+ice hockey
+field hockey
+surfing
+karate
+horse racing
+snowboarding
+skateboarding
+cycling
+archery
+fishing
+gymnastics
+figure skating
+sumo wrestling
+taekwondo
+fencing
+weight lifting
+judo
+wind surfing
+wrestling
+hang gliding
+canoeing
+curling
+pickleball
+frisbee
+dodgeball
+rock climbing
+jujutsu
+hunting
+bullriding
+skibobbing
+lacrosse
