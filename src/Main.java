@@ -230,7 +230,7 @@ public class Main {
         JButton umw = new JButton("UMW");
         umw.addActionListener(new ButtonListener("umw.txt"));
         JButton challenge = new JButton("Challenge");
-        challenge.addActionListener(new ButtonListener("challenge.txt.txt"));
+        challenge.addActionListener(new ButtonListener("challenge.txt"));
 
         JPanel categories = new JPanel();
         categories.setLayout(new GridLayout(3,3));
