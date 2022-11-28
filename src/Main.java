@@ -34,7 +34,7 @@ public class Main {
         JButton umw = new JButton("UMW");
         umw.addActionListener(new ButtonListener("umw.txt"));
         JButton challenge = new JButton("Challenge");
-        challenge.addActionListener(new ButtonListener("challenge.txt"));
+        challenge.addActionListener(new ButtonListener("challenge.txt.txt"));
 
         startMenu.getContentPane().add(categories);
         startMenu.getContentPane().add(animals);
