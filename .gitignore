@@ -3,6 +3,7 @@
 
 #IML
 *.iml
+*.xml
 
 #Idea folder
 *.idea
