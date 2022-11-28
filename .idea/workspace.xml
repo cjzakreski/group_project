@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d56210b3-250e-4a37-9c12-57f9bcec4c4c" name="Changes" comment="wrote to .txt files" />
+    <list default="true" id="d56210b3-250e-4a37-9c12-57f9bcec4c4c" name="Changes" comment="wrote to .txt files">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/group_project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/.idea/group_project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/AUTHORS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/FGPDesign.dia" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Fifth Wrong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Final_Project_Proposal.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/First Wrong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Fourth Wrong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Game Over.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Second Wrong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Start.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_project/Third Wrong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categories.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Guess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Guess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,32 +51,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-18 (2)&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Spaced Repetition System/src/Deck.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-18 (2)",
+    "last_opened_file_path": "C:/group_project/src/Guess.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\group_project\" />
+      <recent name="C:\group_project\src" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="lab13" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="lab13" />
       <module name="group_project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -114,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669166772193</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="wrote to .txt files">
+      <created>1669166851208</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669166851208</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -11,10 +12,14 @@ public class Categories {
 
     public Categories(String filename) {
         this.filename = filename;
+        this.wordList = new ArrayList<>();
 
         Scanner in = null;
         try {
-            reader = new FileReader(filename);
+            String var = new File(filename).getAbsolutePath();
+            reader = new FileReader("./categories/" + filename);
+
+
             in = new Scanner(reader);
         } catch (FileNotFoundException e) {
             System.out.println("Error, file could not be found!");
