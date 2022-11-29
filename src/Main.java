@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
 import java.util.ArrayList;
+import java.util.Map;
 
 class ButtonListener implements ActionListener{
     private String filename = null;
@@ -140,6 +142,19 @@ class WordGuessListener implements ActionListener{
 
         JLabel hslabel = new JLabel("High Scores");
         highScore.add(hslabel);
+
+        //creates the grid layout to display high scores
+        JPanel hs = new JPanel();
+        hs.setLayout(new GridLayout(6,3));
+        JLabel hsname = new JLabel("Name:");
+        JLabel hscore = new JLabel("Score:");
+        JLabel hscategory = new JLabel("Category:");
+        hs.add(hsname);
+        hs.add(hscore);
+        hs.add(hscategory);
+        hs.setVisible(true);
+        highScore.add(hs);
+        highScore.pack();
         highScore.pack();
 
         if(result == true) {
@@ -243,7 +258,19 @@ class LetterGuessListener implements ActionListener {
         // creates header label for High Score JFrame
         JLabel hslabel = new JLabel("High Scores");
         highScore.add(hslabel);
+        highScore.pack();
 
+        //creates the grid layout to display high scores
+        JPanel hs = new JPanel();
+        hs.setLayout(new GridLayout(6,3));
+        JLabel hsname = new JLabel("Name:");
+        JLabel hscore = new JLabel("Score:");
+        JLabel hscategory = new JLabel("Category:");
+        hs.add(hsname);
+        hs.add(hscore);
+        hs.add(hscategory);
+        hs.setVisible(true);
+        highScore.add(hs);
         highScore.pack();
 
         // turns the ArrayList of current guess word into a String
@@ -274,6 +301,7 @@ public class Main {
         JLabel welcome = new JLabel("Welcome to Hangman!");
         JLabel nameLabel = new JLabel("Name:", SwingConstants.RIGHT);
         JTextField enteredName = new JTextField();
+        HighScores score = new HighScores(enteredName.getText(),0,"null");
         JLabel categoriesLabel = new JLabel("Select a category");
         JButton animals = new JButton("Animals");
         animals.addActionListener(new ButtonListener("animals.txt"));
