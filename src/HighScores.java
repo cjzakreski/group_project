@@ -24,13 +24,10 @@ public class HighScores {
     // compares the score the scores from the file if it exists, if not, writes it into the file
     public void compareScores() throws IOException {
         HighScores newScore = new HighScores(this.name, this.numGuesses, this.category);
-        String path = System.getProperty("user.home") + File.separator + "HighScores.txt";
+        String path = System.getProperty("user.home") + File.separator + "HangmanHighScores.txt";
         File scoresFile = new File(path);
         if (!scoresFile.exists()) {
-            boolean success = scoresFile.createNewFile();
-            if (!success) {
-                // catch exception that file could not be created
-            }
+            scoresFile.createNewFile();
         }
 
         ArrayList<HighScores> hsList= new ArrayList<>();
@@ -44,16 +41,16 @@ public class HighScores {
             e.printStackTrace();
         }
 
-        // loops through to compare the highscore to the highscores in the list
+        // loops through to compare the highscore to the highscores in the list if it is not empty
         // inserting it at the correct ranking
         for (HighScores hs : hsList) {
             if (this.numGuesses > hs.getNumGuesses()) {
                 hsList.add(hsList.indexOf(hs), newScore);
-                continue;
+                break;
             }
         }
-        if (hsList.size()==5) {
-            hsList.remove(4);
+        if (hsList.size()>=5) {
+            hsList.remove(5);
         }
 
         // overwrite the scores of hsList into the highscores file
@@ -72,6 +69,29 @@ public class HighScores {
         }
     }
 
+    // this could return an arraylist to print on the display window
+    public void displayHighScores() {
+        ArrayList<HighScores> hsList= new ArrayList<>();
+        try {
+            Scanner sc = new Scanner(scoresFile);
+            while (sc.hasNextLine()) {
+                HighScores hs = new HighScores(sc);
+                hsList.add(hs);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i=0; i<hsList.size(); i++) {
+            HighScore hs = hsList.get(i);
+            String labels = String.format("%-25s %-6s %-25s", "Name", "Score", "Category");
+            System.out.println(labels);
+            String hsPrint = String.format("%-25s %-6s %-25s", hs.getName(), hs.getNumGuesses(), hs.getCategory());
+            System.out.println((i+1) + hsPrint);
+        }
+
+    }
+
     public String getName() {
         return this.name;
     }
@@ -82,5 +102,9 @@ public class HighScores {
 
     public String getCategory() {
         return this.category;
+    }
+
+    public void addGuess() {
+        this.numGuesses++;
     }
 }
