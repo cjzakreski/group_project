@@ -6,11 +6,11 @@ import java.util.ArrayList;
 class ButtonListener implements ActionListener{
     private String filename = null;
     private ArrayList<String> wrongLetterBank;
-    private int guessCount = 0;
-
+    private int guessCount;
     public ButtonListener(String fileName){
         this.filename = fileName;
         this.wrongLetterBank = new ArrayList<>();
+        this.guessCount = 0;
     }
     @Override
     public void actionPerformed(ActionEvent e){
@@ -32,10 +32,9 @@ class ButtonListener implements ActionListener{
         JLabel wrongAnswer = new JLabel("Wrong Letters");
         wrongGuessPanel.add(wrongAnswer);
 
-        /* testing purposes
+        //testing purposes
         JLabel target = new JLabel(targetWord);
         game.getContentPane().add(target);
-         */
 
         JPanel guessLetterPanel = new JPanel();
         guessLetterPanel.setLayout(new GridLayout(6,5));
@@ -47,7 +46,6 @@ class ButtonListener implements ActionListener{
         guessWordPanel.setLayout(new GridLayout(1,5));
         guessWordPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 40, 10));
         JLabel wordGuessHeader = new JLabel("Guess a word:");
-        JLabel blank = new JLabel("");
         JTextField enteredGuess = new JTextField();
         String guessString = enteredGuess.getText();;
 
@@ -56,7 +54,10 @@ class ButtonListener implements ActionListener{
         displayWordGuess.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         for(int i=0; i < targetWord.length(); i++) {
             String targetLetter = Character.toString(targetWord.charAt(i));
-            if(targetLetter.equals(guessString)) {
+            if(targetLetter.equals(" ")) {
+                JLabel space = new JLabel(" ");
+                displayWordGuess.add(space);
+            } else if(targetLetter.equals(guessString)) {
                 JLabel space = new JLabel(targetLetter);
                 displayWordGuess.add(space);
             } else {
@@ -65,23 +66,24 @@ class ButtonListener implements ActionListener{
             }
         }
 
-        JButton wordGuess = new JButton("Guess Word");
-        wordGuess.addActionListener(new WordGuessListener(targetWord, enteredGuess, displayWordGuess));
-        guessWordPanel.add(wordGuessHeader);
-        guessWordPanel.add(enteredGuess);
-        //game.getContentPane().add(letterGuess);
-        guessWordPanel.add(wordGuess);
-        guessWordPanel.add(blank);
-        guessWordPanel.add(blank);
-        guessWordPanel.add(blank);
-        guessWordPanel.add(blank);
-
-
+        // ArrayList to store the current state of the guessed words - can update ArrayList to store the correct letters guessed; accounts for white spaces in the word
         ArrayList<String> currentGuessWord = new ArrayList<>();
 
         for(int i=0; i< targetWord.length();i++) {
-            currentGuessWord.add("*");
+            String targetLetter = Character.toString(targetWord.charAt(i));
+            if(targetLetter.equals(" ")) {
+                currentGuessWord.add(" ");
+            } else {
+                currentGuessWord.add("*");
+            }
         }
+
+
+        JButton wordGuess = new JButton("Guess Word");
+        wordGuess.addActionListener(new WordGuessListener(targetWord, enteredGuess, displayWordGuess, currentGuessWord));
+        guessWordPanel.add(wordGuessHeader);
+        guessWordPanel.add(enteredGuess);
+        guessWordPanel.add(wordGuess);
 
         //alphabet button option
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -105,6 +107,7 @@ class ButtonListener implements ActionListener{
 
         game.pack();
         game.setVisible(true);
+
     }
 }
 
@@ -112,21 +115,42 @@ class WordGuessListener implements ActionListener{
     private String targetWord;
     private JTextField guess;
     private JPanel guessWord;
+    private ArrayList<String> currentGuessWord;
 
-    public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord){
+    public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord){
         this.targetWord = targetWord;
         this.guess = guess;
         this.guessWord = guessWord;
+        this.currentGuessWord = currentGuessWord;
     }
     @Override
     public void actionPerformed(ActionEvent e){
         String guessString = guess.getText();;
         Guess thisGuess = new Guess(targetWord, guessString);
         boolean result = thisGuess.wordGuess();
+
+        // creates high score JFrame
+        JFrame highScore = new JFrame("High Scores");
+        highScore.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        highScore.getContentPane().setLayout(new BoxLayout(highScore.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel hslabel = new JLabel("High Scores");
+        highScore.add(hslabel);
+        highScore.pack();
+
         if(result == true) {
             JOptionPane.showMessageDialog(null, "The word guess is correct!");
 
             guessWord.removeAll();
+            // checks if current guess word is the target word
+            if(guessString.equals(targetWord)) {
+                // if true, it opens a High Score Class
+                JOptionPane.showMessageDialog(null, "You win!");
+                highScore.setVisible(true);
+            } else {
+                highScore.setVisible(false);
+            }
+
             for(int a=0;a<targetWord.length();a++) {
                 JLabel letter = new JLabel(Character.toString(targetWord.charAt(a)));
                 guessWord.add(letter);
@@ -136,6 +160,7 @@ class WordGuessListener implements ActionListener{
         } else {
             JOptionPane.showMessageDialog(null, "The word guess is incorrect!");
         }
+
     }
 }
 
@@ -171,6 +196,7 @@ class LetterGuessListener implements ActionListener {
             wrongBank.add(guess);
         }
 
+
         // clears the display for the wrong letters
         wrongLetterBank.removeAll();
 
@@ -202,6 +228,35 @@ class LetterGuessListener implements ActionListener {
 
         guessWord.revalidate();
         guessWord.repaint();
+
+
+        // creates high score JFrame
+        JFrame highScore = new JFrame("High Scores");
+        highScore.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        highScore.getContentPane().setLayout(new BoxLayout(highScore.getContentPane(), BoxLayout.Y_AXIS));
+
+        // creates header label for High Score JFrame
+        JLabel hslabel = new JLabel("High Scores");
+        highScore.add(hslabel);
+
+        highScore.pack();
+
+        // turns the ArrayList of current guess word into a String
+        String currentGuessWordString = "";
+
+        for(int i=0; i< targetWord.length();i++) {
+            String lett = currentGuessWord.get(i);
+            currentGuessWordString += lett;
+        }
+
+        // checks if current guess word is the target word
+        if(currentGuessWordString.equals(targetWord)) {
+            // if true, it opens a High Score Class
+            JOptionPane.showMessageDialog(null, "You win!");
+            highScore.setVisible(true);
+        } else {
+            highScore.setVisible(false);
+        }
     }
 }
 
