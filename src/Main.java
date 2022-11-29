@@ -296,6 +296,7 @@ public class Main {
         JLabel welcome = new JLabel("Welcome to Hangman!");
         JLabel nameLabel = new JLabel("Name:", SwingConstants.RIGHT);
         JTextField enteredName = new JTextField();
+        HighScores score = new HighScores(enteredName.getText(),0,"null");
         JLabel categoriesLabel = new JLabel("Select a category");
         JButton animals = new JButton("Animals");
         animals.addActionListener(new ButtonListener("animals.txt"));
