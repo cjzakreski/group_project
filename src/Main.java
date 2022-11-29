@@ -7,10 +7,12 @@ class ButtonListener implements ActionListener{
     private String filename = null;
     private ArrayList<String> wrongLetterBank;
     private int guessCount;
+    private int wrongGuessCount;
     public ButtonListener(String fileName){
         this.filename = fileName;
         this.wrongLetterBank = new ArrayList<>();
         this.guessCount = 0;
+        this.wrongGuessCount = 0;
     }
     @Override
     public void actionPerformed(ActionEvent e){
@@ -32,7 +34,7 @@ class ButtonListener implements ActionListener{
         JLabel wrongAnswer = new JLabel("Wrong Letters");
         wrongGuessPanel.add(wrongAnswer);
 
-        //testing purposes
+        //testing purposes - displays the targetword
         JLabel target = new JLabel(targetWord);
         game.getContentPane().add(target);
 
@@ -80,7 +82,7 @@ class ButtonListener implements ActionListener{
 
 
         JButton wordGuess = new JButton("Guess Word");
-        wordGuess.addActionListener(new WordGuessListener(targetWord, enteredGuess, displayWordGuess, currentGuessWord));
+        wordGuess.addActionListener(new WordGuessListener(targetWord, enteredGuess, displayWordGuess, currentGuessWord, wrongGuessCount));
         guessWordPanel.add(wordGuessHeader);
         guessWordPanel.add(enteredGuess);
         guessWordPanel.add(wordGuess);
@@ -90,7 +92,7 @@ class ButtonListener implements ActionListener{
         for(int i=0; i<alphabet.length(); i++) {
             String alphletter = String.valueOf(alphabet.charAt(i));
             JButton letter = new JButton(alphletter);
-            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, guessCount, currentGuessWord));
+            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, guessCount, currentGuessWord,wrongGuessCount));
             guessLetterPanel.add(letter);
         }
 
@@ -116,12 +118,14 @@ class WordGuessListener implements ActionListener{
     private JTextField guess;
     private JPanel guessWord;
     private ArrayList<String> currentGuessWord;
+    private int wrongGuessCount;
 
-    public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord){
+    public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord, int wrongGuessCount){
         this.targetWord = targetWord;
         this.guess = guess;
         this.guessWord = guessWord;
         this.currentGuessWord = currentGuessWord;
+        this.wrongGuessCount = wrongGuessCount;
     }
     @Override
     public void actionPerformed(ActionEvent e){
@@ -172,8 +176,9 @@ class LetterGuessListener implements ActionListener {
     private JPanel guessWord;
     private int guessCount;
     private ArrayList<String> currentGuessWord;
+    private int wrongGuessCount;
 
-    public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, int guessCount, ArrayList<String> currentGuessWord) {
+    public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, int guessCount, ArrayList<String> currentGuessWord, int wrongGuessCount) {
         this.targetWord = targetWord;
         this.guess = guess;
         this.wrongBank = wrong;
