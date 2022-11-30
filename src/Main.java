@@ -155,6 +155,17 @@ class ButtonListener implements ActionListener{
     }
 }
 
+class CustomButtonListener implements ActionListener{
+
+    // performs this code when the custom JButton is selected
+    @Override
+    public void actionPerformed(ActionEvent e){
+        CustomWords customWords = new CustomWords();
+        customWords.displayCustomFrame();
+    }
+}
+
+
 class WordGuessListener implements ActionListener{
     private String targetWord;
     private JTextField guess;

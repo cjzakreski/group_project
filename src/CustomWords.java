@@ -46,9 +46,9 @@ public class CustomWords {
         customPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         customFrame.getContentPane().add(customPanel);
 
-        JLabel customLabel = new JLabel("Enter a word to add, or press enter to continue to game:");
+        JLabel customLabel = new JLabel("Enter a word to add: ");
         JTextField customField = new JTextField();
-        JButton okButton = new JButton("OK");
+        JButton okButton = new JButton("Enter and Play Game");
         okButton.addActionListener(new CustomWordsListener(this, customField));
 
         customPanel.add(customLabel);
@@ -83,5 +83,7 @@ class CustomWordsListener implements ActionListener {
         } catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
         }
+
+
     }
 }
