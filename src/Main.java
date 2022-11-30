@@ -9,7 +9,7 @@ class ButtonListener implements ActionListener{
     private ArrayList<String> wrongLetterBank;
 
 
-    // constructor takes parameters: filename; initializes the ArrayList wrongLetterBank
+    // constructor takes parameter: filename; initializes the ArrayList wrongLetterBank
     public ButtonListener(String fileName){
         this.filename = fileName;
         this.wrongLetterBank = new ArrayList<>();
@@ -23,11 +23,13 @@ class ButtonListener implements ActionListener{
         // if filename selected is custom.txt, allow the user to enter a word
         /*
         UNBLOCK THIS TEXT ONCE CUSTOM WORDS CLASS IS ADDED
+
+         */
         if (this.filename.equals("custom.txt")) {
             CustomWords customWords = new CustomWords();
             customWords.displayCustomFrame();
         }
-        */
+
 
 
         // creates a Categories object; parameter: String of the selected category filename
@@ -146,6 +148,7 @@ class ButtonListener implements ActionListener{
         game.pack();
         game.setVisible(true);
 
+        // creates a JFrame of the rules that automatically pops up in front of the Hangman Game
         JFrame rules = new JFrame("Rules");
         rules.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         ImageIcon rulesImage = new ImageIcon(new ImageIcon("images/rules.png").getImage().getScaledInstance(600,375,Image.SCALE_DEFAULT));
