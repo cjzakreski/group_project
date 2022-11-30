@@ -316,6 +316,7 @@ class LetterGuessListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "You win!");
             pause();
         } else if(wrongBank.size() == 6){
+            // if the user reached the six wrong guess limit, the game ends and closes
             JOptionPane.showMessageDialog(null, "Better luck next time!");
             pause();
         }
@@ -337,7 +338,6 @@ public class Main {
 
         JLabel welcome = new JLabel("Welcome to Hangman!");
 
-        // HighScores score = new HighScores(enteredName.getText(),0,"null");
         JLabel categoriesLabel = new JLabel("Select a category");
         JButton animals = new JButton("Animals");
         animals.addActionListener(new ButtonListener("animals.txt"));
