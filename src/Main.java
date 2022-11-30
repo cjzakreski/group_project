@@ -5,15 +5,14 @@ import java.util.ArrayList;
 
 // class ButtonListener is used when a category JButton is selected
 class ButtonListener implements ActionListener{
-    private String filename = null;
+    private String filename;
     private ArrayList<String> wrongLetterBank;
-    private int guessCount;
 
-    // constructor takes parameters: filename, and guessCount; initializes the ArrayList wrongLetterBank
-    public ButtonListener(String fileName, int guessCount){
+
+    // constructor takes parameters: filename; initializes the ArrayList wrongLetterBank
+    public ButtonListener(String fileName){
         this.filename = fileName;
         this.wrongLetterBank = new ArrayList<>();
-        this.guessCount = guessCount;
 
     }
 
@@ -21,13 +20,14 @@ class ButtonListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
 
-        // testing purposes: JOptionPane.showMessageDialog(null, "We entered this button");
-
         // if filename selected is custom.txt, allow the user to enter a word
+        /*
+        UNBLOCK THIS TEXT ONCE CUSTOM WORDS CLASS IS ADDED
         if (this.filename.equals("custom.txt")) {
             CustomWords customWords = new CustomWords();
             customWords.displayCustomFrame();
         }
+        */
 
 
         // creates a Categories object; parameter: String of the selected category filename
@@ -36,7 +36,6 @@ class ButtonListener implements ActionListener{
         // uses Categories method getWord to randomly selected a targetword; stores this targetword as a String
         String targetWord = c.getWord();
 
-        JOptionPane.showMessageDialog(null, "Now we will start the Hangman Game!");
 
         // JFrame display for the Hangman Game
         JFrame game = new JFrame("Hangman Game");
@@ -44,7 +43,7 @@ class ButtonListener implements ActionListener{
         game.getContentPane().setLayout(new BoxLayout(game.getContentPane(), BoxLayout.Y_AXIS));
 
         // creates a Gallows image and adds it to a JLabel
-        ImageIcon image= new ImageIcon(new ImageIcon("Start.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+        ImageIcon image= new ImageIcon(new ImageIcon("images/Start.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
         JLabel gallowsLabel = new JLabel();
         gallowsLabel.setIcon(image);
 
@@ -124,7 +123,7 @@ class ButtonListener implements ActionListener{
             JButton letter = new JButton(alphletter);
 
             // adds ActionListener called LetterGuessListener that checks if the letter guess is correct
-            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, guessCount, currentGuessWord,gallowsLabel));
+            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, currentGuessWord,gallowsLabel));
 
             // adds the JButton letter to the JPanel guessLetterPanel
             guessLetterPanel.add(letter);
@@ -146,6 +145,15 @@ class ButtonListener implements ActionListener{
         // packs JFrame and setVisible to true
         game.pack();
         game.setVisible(true);
+
+        JFrame rules = new JFrame("Rules");
+        rules.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        ImageIcon rulesImage = new ImageIcon(new ImageIcon("images/rules.png").getImage().getScaledInstance(600,375,Image.SCALE_DEFAULT));
+        JLabel rulesLabel = new JLabel();
+        rulesLabel.setIcon(rulesImage);
+        rules.add(rulesLabel);
+        rules.setVisible(true);
+        rules.pack();
 
     }
 }
@@ -170,27 +178,6 @@ class WordGuessListener implements ActionListener{
         Guess thisGuess = new Guess(targetWord, guessString);
         boolean result = thisGuess.wordGuess();
 
-        // creates high score JFrame
-        JFrame highScore = new JFrame("High Scores");
-        highScore.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        highScore.getContentPane().setLayout(new BoxLayout(highScore.getContentPane(), BoxLayout.Y_AXIS));
-
-        JLabel hslabel = new JLabel("High Scores");
-        highScore.add(hslabel);
-
-        //creates the grid layout to display high scores
-        JPanel hs = new JPanel();
-        hs.setLayout(new GridLayout(6,3));
-        JLabel hsname = new JLabel("Name:");
-        JLabel hscore = new JLabel("Score:");
-        JLabel hscategory = new JLabel("Category:");
-        hs.add(hsname);
-        hs.add(hscore);
-        hs.add(hscategory);
-        hs.setVisible(true);
-        highScore.add(hs);
-        highScore.pack();
-        highScore.pack();
 
         if(result) {
             JOptionPane.showMessageDialog(null, "The word guess is correct!");
@@ -198,11 +185,8 @@ class WordGuessListener implements ActionListener{
             guessWord.removeAll();
             // checks if current guess word is the target word
             if(guessString.equals(targetWord)) {
-                // if true, it opens a High Score JFrame
                 JOptionPane.showMessageDialog(null, "You win!");
-                highScore.setVisible(true);
-            } else {
-                highScore.setVisible(false);
+
             }
 
             for(int a=0;a<targetWord.length();a++) {
@@ -216,6 +200,11 @@ class WordGuessListener implements ActionListener{
         }
 
     }
+    public void pause(){
+        try{
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {}
+    }
 }
 
 class LetterGuessListener implements ActionListener {
@@ -224,17 +213,15 @@ class LetterGuessListener implements ActionListener {
     private ArrayList<String> wrongBank;
     private JPanel wrongLetterBank;
     private JPanel guessWord;
-    private int guessCount;
     private ArrayList<String> currentGuessWord;
     private JLabel gallowsLabel;
 
-    public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, int guessCount, ArrayList<String> currentGuessWord, JLabel gallows) {
+    public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, ArrayList<String> currentGuessWord, JLabel gallows) {
         this.targetWord = targetWord;
         this.guess = guess;
         this.wrongBank = wrong;
         this.wrongLetterBank = wrongLetterBank;
         this.guessWord= guessWord;
-        this.guessCount = guessCount;
         this.currentGuessWord = currentGuessWord;
         this.gallowsLabel = gallows;
     }
@@ -253,22 +240,22 @@ class LetterGuessListener implements ActionListener {
             gallowsLabel.removeAll();
 
             if(wrongBank.size() == 1){
-                ImageIcon one = new ImageIcon(new ImageIcon("First Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+                ImageIcon one = new ImageIcon(new ImageIcon("images/First Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(one);
             } else if(wrongBank.size() == 2) {
-                ImageIcon two = new ImageIcon(new ImageIcon("Second Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+                ImageIcon two = new ImageIcon(new ImageIcon("images/Second Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(two);
             } else if(wrongBank.size() == 3) {
-                ImageIcon three = new ImageIcon(new ImageIcon("Third Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+                ImageIcon three = new ImageIcon(new ImageIcon("images/Third Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(three);
             } else if(wrongBank.size() == 4) {
-                ImageIcon four = new ImageIcon(new ImageIcon("Fourth Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+                ImageIcon four = new ImageIcon(new ImageIcon("images/Fourth Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(four);
             } else if(wrongBank.size() == 5) {
-                ImageIcon five = new ImageIcon(new ImageIcon("Fifth Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+                ImageIcon five = new ImageIcon(new ImageIcon("images/Fifth Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(five);
             } else if (wrongBank.size() == 6){
-                ImageIcon six = new ImageIcon(new ImageIcon("Game OVer.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+                ImageIcon six = new ImageIcon(new ImageIcon("images/Game OVer.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(six);
             }
             gallowsLabel.revalidate();
@@ -310,28 +297,6 @@ class LetterGuessListener implements ActionListener {
         guessWord.repaint();
 
 
-        // creates high score JFrame
-        JFrame highScore = new JFrame("High Scores");
-        highScore.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        highScore.getContentPane().setLayout(new BoxLayout(highScore.getContentPane(), BoxLayout.Y_AXIS));
-
-        // creates header label for High Score JFrame
-        JLabel hslabel = new JLabel("High Scores");
-        highScore.add(hslabel);
-        highScore.pack();
-
-        //creates the grid layout to display high scores
-        JPanel hs = new JPanel();
-        hs.setLayout(new GridLayout(7,1));
-        JLabel hsname = new JLabel("Name:");
-        JLabel hscore = new JLabel("Score:");
-        JLabel hscategory = new JLabel("Category:");
-        hs.add(hsname);
-        hs.add(hscore);
-        hs.add(hscategory);
-        hs.setVisible(true);
-        highScore.add(hs);
-        highScore.pack();
 
         // turns the ArrayList of current guess word into a String
         String currentGuessWordString = "";
@@ -345,10 +310,18 @@ class LetterGuessListener implements ActionListener {
         if(currentGuessWordString.equals(targetWord)) {
             // if true, it opens a High Score Class
             JOptionPane.showMessageDialog(null, "You win!");
-            highScore.setVisible(true);
-        } else {
-            highScore.setVisible(false);
+            pause();
+            System.exit(0);
+        } else if(wrongBank.size() == 6){
+            JOptionPane.showMessageDialog(null, "Better luck next time!");
+            pause();
+            System.exit(0);
         }
+    }
+    public void pause(){
+        try{
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {}
     }
 }
 
@@ -360,29 +333,27 @@ public class Main {
         startMenu.getContentPane().setLayout(new BoxLayout(startMenu.getContentPane(), BoxLayout.Y_AXIS));
 
         JLabel welcome = new JLabel("Welcome to Hangman!");
-        JLabel nameLabel = new JLabel("Name:", SwingConstants.RIGHT);
-        JTextField enteredName = new JTextField();
 
         // HighScores score = new HighScores(enteredName.getText(),0,"null");
         JLabel categoriesLabel = new JLabel("Select a category");
         JButton animals = new JButton("Animals");
-        animals.addActionListener(new ButtonListener("animals.txt", 0));
+        animals.addActionListener(new ButtonListener("animals.txt"));
         JButton colors = new JButton("Colors");
-        colors.addActionListener(new ButtonListener("colors.txt", 0));
+        colors.addActionListener(new ButtonListener("colors.txt"));
         JButton food = new JButton("Food");
-        food.addActionListener(new ButtonListener("food.txt", 0));
+        food.addActionListener(new ButtonListener("food.txt"));
         JButton countries = new JButton("Countries");
-        countries.addActionListener(new ButtonListener("countries.txt", 0));
+        countries.addActionListener(new ButtonListener("countries.txt"));
         JButton sports = new JButton("Sports");
-        food.addActionListener(new ButtonListener("sports.txt", 0));
+        food.addActionListener(new ButtonListener("sports.txt"));
         JButton hobbies = new JButton("Hobbies");
-        food.addActionListener(new ButtonListener("hobbies.txt", 0));
+        food.addActionListener(new ButtonListener("hobbies.txt"));
         JButton umw = new JButton("UMW");
-        umw.addActionListener(new ButtonListener("umw.txt", 0));
+        umw.addActionListener(new ButtonListener("umw.txt"));
         JButton challenge = new JButton("Challenge");
-        challenge.addActionListener(new ButtonListener("challenge.txt", 0));
+        challenge.addActionListener(new ButtonListener("challenge.txt"));
         JButton custom = new JButton("Custom");
-        custom.addActionListener(new ButtonListener("custom.txt", 0));
+        custom.addActionListener(new ButtonListener("custom.txt"));
 
         JPanel categories = new JPanel();
         categories.setLayout(new GridLayout(3,3));
@@ -398,8 +369,6 @@ public class Main {
         categories.add(custom);
 
         startMenu.getContentPane().add(welcome);
-        startMenu.getContentPane().add(nameLabel);
-        startMenu.getContentPane().add(enteredName);
         startMenu.getContentPane().add(categoriesLabel);
         startMenu.getContentPane().add(categories);
 
