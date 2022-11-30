@@ -28,6 +28,7 @@ public class Categories {
 
         while(in.hasNext()) {
             String word = in.nextLine();
+            word = word.toLowerCase();
             wordList.add(word);
         }
     }
