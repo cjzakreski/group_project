@@ -1,4 +1,4 @@
-import java.io.*;
+/* import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class HighScores {
     // compares the score the scores from the file if it exists, if not, writes it into the file
     public void compareScores() throws IOException {
         HighScores newScore = new HighScores(this.name, this.numGuesses, this.category);
-        String path = "/hangman.txt";
+        String path = System.getProperty("user.home") + File.separator + "HangmanHighScores.txt";
         File scoresFile = new File(path);
         if (!scoresFile.exists()) {
             scoresFile.createNewFile();
@@ -73,8 +73,6 @@ public class HighScores {
     public void displayHighScores() {
         ArrayList<HighScores> hsList= new ArrayList<>();
         try {
-            String path = "/hangman.txt";
-            File scoresFile = new File(path);
             Scanner sc = new Scanner(scoresFile);
             while (sc.hasNextLine()) {
                 HighScores hs = new HighScores(sc);
@@ -85,10 +83,10 @@ public class HighScores {
         }
 
         for (int i=0; i<hsList.size(); i++) {
-            HighScores hs = hsList.get(i);
+            HighScore hs = hsList.get(i);
             String labels = String.format("%-25s %-6s %-25s", "Name", "Score", "Category");
             System.out.println(labels);
-            String hsPrint = String.format("%-25s %-6s %-25s", name, numGuesses, category);
+            String hsPrint = String.format("%-25s %-6s %-25s", hs.getName(), hs.getNumGuesses(), hs.getCategory());
             System.out.println((i+1) + hsPrint);
         }
 
@@ -110,3 +108,5 @@ public class HighScores {
         this.numGuesses++;
     }
 }
+
+ */
