@@ -345,9 +345,9 @@ public class Main {
         JButton countries = new JButton("Countries");
         countries.addActionListener(new ButtonListener("countries.txt"));
         JButton sports = new JButton("Sports");
-        food.addActionListener(new ButtonListener("sports.txt"));
+        sports.addActionListener(new ButtonListener("sports.txt"));
         JButton hobbies = new JButton("Hobbies");
-        food.addActionListener(new ButtonListener("hobbies.txt"));
+        hobbies.addActionListener(new ButtonListener("hobbies.txt"));
         JButton umw = new JButton("UMW");
         umw.addActionListener(new ButtonListener("umw.txt"));
         JButton challenge = new JButton("Challenge");
