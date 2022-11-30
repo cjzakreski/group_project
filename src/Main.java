@@ -143,23 +143,25 @@ class ButtonListener implements ActionListener{
     }
 }
 
-class WordGuessListener implements ActionListener{
+class WordGuessListener implements ActionListener {
     private String targetWord;
     private JTextField guess;
     private JPanel guessWord;
     private ArrayList<String> currentGuessWord;
 
 
-    public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord){
+    public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord) {
         this.targetWord = targetWord;
         this.guess = guess;
         this.guessWord = guessWord;
         this.currentGuessWord = currentGuessWord;
 
     }
+
     @Override
-    public void actionPerformed(ActionEvent e){
-        String guessString = guess.getText();;
+    public void actionPerformed(ActionEvent e) {
+        String guessString = guess.getText();
+        ;
         Guess thisGuess = new Guess(targetWord, guessString);
         boolean result = thisGuess.wordGuess();
 
@@ -173,7 +175,7 @@ class WordGuessListener implements ActionListener{
 
         //creates the grid layout to display high scores
         JPanel hs = new JPanel();
-        hs.setLayout(new GridLayout(6,3));
+        hs.setLayout(new GridLayout(6, 3));
         JLabel hsname = new JLabel("Name:");
         JLabel hscore = new JLabel("Score:");
         JLabel hscategory = new JLabel("Category:");
@@ -185,20 +187,21 @@ class WordGuessListener implements ActionListener{
         highScore.pack();
         highScore.pack();
 
-        if(result == true) {
+        if (result == true) {
             JOptionPane.showMessageDialog(null, "The word guess is correct!");
 
             guessWord.removeAll();
             // checks if current guess word is the target word
-            if(guessString.equals(targetWord)) {
+            if (guessString.equals(targetWord)) {
                 // if true, it opens a High Score JFrame
                 JOptionPane.showMessageDialog(null, "You win!");
-                highScore.setVisible(true);
-            } else {
-                highScore.setVisible(false);
+                pause();
+                System.exit(0);
+            } else{
+                JOptionPane.showMessageDialog(null, "Incorrect word, try guessing some more letters");
             }
 
-            for(int a=0;a<targetWord.length();a++) {
+            for (int a = 0; a < targetWord.length(); a++) {
                 JLabel letter = new JLabel(Character.toString(targetWord.charAt(a)));
                 guessWord.add(letter);
             }
@@ -208,6 +211,13 @@ class WordGuessListener implements ActionListener{
             JOptionPane.showMessageDialog(null, "The word guess is incorrect!");
         }
 
+    }
+
+    public static void pause() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
     }
 }
 
@@ -302,30 +312,6 @@ class LetterGuessListener implements ActionListener {
         guessWord.revalidate();
         guessWord.repaint();
 
-
-        // creates high score JFrame
-        JFrame highScore = new JFrame("High Scores");
-        highScore.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        highScore.getContentPane().setLayout(new BoxLayout(highScore.getContentPane(), BoxLayout.Y_AXIS));
-
-        // creates header label for High Score JFrame
-        JLabel hslabel = new JLabel("High Scores");
-        highScore.add(hslabel);
-        highScore.pack();
-
-        //creates the grid layout to display high scores
-        JPanel hs = new JPanel();
-        hs.setLayout(new GridLayout(7,1));
-        JLabel hsname = new JLabel("Name:");
-        JLabel hscore = new JLabel("Score:");
-        JLabel hscategory = new JLabel("Category:");
-        hs.add(hsname);
-        hs.add(hscore);
-        hs.add(hscategory);
-        hs.setVisible(true);
-        highScore.add(hs);
-        highScore.pack();
-
         // turns the ArrayList of current guess word into a String
         String currentGuessWordString = "";
 
@@ -338,10 +324,18 @@ class LetterGuessListener implements ActionListener {
         if(currentGuessWordString.equals(targetWord)) {
             // if true, it opens a High Score Class
             JOptionPane.showMessageDialog(null, "You win!");
-            highScore.setVisible(true);
-        } else {
-            highScore.setVisible(false);
+            pause();
+            System.exit(0);
+        } else if (wrongBank.size() == 6) {
+            JOptionPane.showMessageDialog(null, "Better luck next time!");
+            pause();
+            System.exit(0);
         }
+    }
+    public static void pause(){
+        try{
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {}
     }
 }
 
