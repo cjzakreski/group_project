@@ -332,6 +332,7 @@ class LetterGuessListener implements ActionListener {
 public class Main {
 
     public static void main(String[] args) {
+        // creates a JFrame for the start menu
         JFrame startMenu = new JFrame("Start Menu");
         startMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startMenu.getContentPane().setLayout(new BoxLayout(startMenu.getContentPane(), BoxLayout.Y_AXIS));
