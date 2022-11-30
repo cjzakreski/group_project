@@ -186,7 +186,7 @@ class WordGuessListener implements ActionListener{
             // checks if current guess word is the target word
             if(guessString.equals(targetWord)) {
                 JOptionPane.showMessageDialog(null, "You win!");
-
+                pause();
             }
 
             for(int a=0;a<targetWord.length();a++) {
@@ -203,6 +203,7 @@ class WordGuessListener implements ActionListener{
     public void pause(){
         try{
             Thread.sleep(1000);
+            System.exit(0);
         } catch(InterruptedException e) {}
     }
 }
@@ -311,16 +312,15 @@ class LetterGuessListener implements ActionListener {
             // if true, it opens a High Score Class
             JOptionPane.showMessageDialog(null, "You win!");
             pause();
-            System.exit(0);
         } else if(wrongBank.size() == 6){
             JOptionPane.showMessageDialog(null, "Better luck next time!");
             pause();
-            System.exit(0);
         }
     }
     public void pause(){
         try{
             Thread.sleep(1000);
+            System.exit(0);
         } catch(InterruptedException e) {}
     }
 }
