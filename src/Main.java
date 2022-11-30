@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 // class ButtonListener is used when a category JButton is selected
@@ -25,8 +26,13 @@ class ButtonListener implements ActionListener{
         UNBLOCK THIS TEXT ONCE CUSTOM WORDS CLASS IS ADDED
 
          */
-        if (this.filename.equals("custom.txt")) {
-            CustomWords customWords = new CustomWords();
+        if (filename.equals("custom.txt")) {
+            CustomWords customWords = null;
+            try {
+                customWords = new CustomWords();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             customWords.displayCustomFrame();
         }
 

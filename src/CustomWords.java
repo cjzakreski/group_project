@@ -4,20 +4,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CustomWords {
-    private String filename;
+    final String fileName = "custom.txt";
+    private ArrayList<String> customList;
 
-    public CustomWords() {
-        this.filename = "custom.txt";
+    public CustomWords() throws IOException {
+        this.customList = new ArrayList<>();
+        File customWordsFile = new File(fileName);
+        customWordsFile.createNewFile();
+        try {
+            Scanner in = new Scanner(customWordsFile);
+            while (in.hasNextLine()) {
+                String word = in.nextLine();
+                word = word.toLowerCase();
+                customList.add(word);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error, file could not be found!");
+            System.exit(-1);
+        }
     }
 
-    // writes the word into the custom.txt text file
-    public void customAddWord(String word) throws FileNotFoundException {
+    // adds the word to the arraylist and writes into the custom.txt text file
+    public void addWord(String word) throws FileNotFoundException {
+        this.customList.add(word);
+
         FileReader reader = null;
         try {
             String var = new File("custom.txt").getAbsolutePath();
-            reader = new FileReader("./categories/" + filename);
+            reader = new FileReader("./categories/" + fileName);
         } catch (FileNotFoundException e) {
             System.out.println("Error, file could not be found!");
             System.exit(-1);
@@ -35,6 +52,7 @@ public class CustomWords {
     }
 
     // creates custom word JFrame which allows the user to enter a word to guess before starting the game
+    // they can choose not to enter a word only if there are words in the file
     public void displayCustomFrame() {
         JFrame customFrame = new JFrame("Enter Custom Words");
 
@@ -44,41 +62,44 @@ public class CustomWords {
         JPanel customPanel = new JPanel();
         customPanel.setLayout(new GridLayout(6,3));
         customPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        customFrame.getContentPane().add(customPanel);
 
-        JLabel customLabel = new JLabel("Enter a word to add, or press enter to continue to game:");
+        JLabel customLabel = new JLabel("Enter a word to add, or exit this window to continue: ");
         JTextField customField = new JTextField();
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(new CustomWordsListener(this, customField));
+        JButton addWordButton = new JButton("Enter Word");
+        addWordButton.addActionListener(new AddWordListener(this, customField));
 
         customPanel.add(customLabel);
         customPanel.add(customField);
-        customPanel.add(okButton);
+        customPanel.add(addWordButton);
+
+        customFrame.getContentPane().add(customPanel);
 
         customPanel.setVisible(true);
+        customFrame.setVisible(true);
 
         customFrame.pack();
-        customFrame.setVisible(true);
+    }
+
+    public void getCustomList(String word) {
+        this.customList.add(word);
     }
 }
 
-class CustomWordsListener implements ActionListener {
-    // constructor is blank
-    CustomWords customWordObject;
+class AddWordListener implements ActionListener {
+    CustomWords customWordObj;
     JTextField customField;
 
-    public CustomWordsListener(CustomWords customWord, JTextField customField) {
+    public AddWordListener(CustomWords customWordObj, JTextField customField) {
         this.customField = customField;
+        this.customWordObj = customWordObj;
     }
 
     // performs this code when the OK JButton is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         String customWord = customField.getText();
-
         try {
-            customWord = customField.getText();
-            customWordObject.customAddWord(customWord);
+            customWordObj.addWord(customWord);
         } catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
         }
