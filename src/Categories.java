@@ -13,7 +13,6 @@ public class Categories {
     public Categories(String filename) {
         this.filename = filename;
         this.wordList = new ArrayList<>();
-
         Scanner in = null;
         try {
             String var = new File(filename).getAbsolutePath();
@@ -26,7 +25,7 @@ public class Categories {
             System.exit(-1);
         }
 
-        while(in.hasNext()) {
+        while (in.hasNext()) {
             String word = in.nextLine();
             word = word.toLowerCase();
             wordList.add(word);
