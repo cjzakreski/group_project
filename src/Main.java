@@ -337,6 +337,7 @@ public class Main {
         startMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startMenu.getContentPane().setLayout(new BoxLayout(startMenu.getContentPane(), BoxLayout.Y_AXIS));
 
+        // created a header for the start menu welcoming the user to the Hangman game
         JLabel welcome = new JLabel("Welcome to Hangman!");
 
         JLabel categoriesLabel = new JLabel("Select a category");
