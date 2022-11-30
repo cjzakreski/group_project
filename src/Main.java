@@ -29,8 +29,6 @@ class ButtonListener implements ActionListener{
         // uses Categories method getWord to randomly selected a targetword; stores this targetword as a String
         String targetWord = c.getWord();
 
-        JOptionPane.showMessageDialog(null, "Now we will start the Hangman Game!");
-
         // JFrame display for the Hangman Game
         JFrame game = new JFrame("Hangman Game");
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,7 +115,7 @@ class ButtonListener implements ActionListener{
             JButton letter = new JButton(alphletter);
 
             // adds ActionListener called LetterGuessListener that checks if the letter guess is correct
-            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, guessCount, currentGuessWord,gallowsLabel));
+            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, currentGuessWord,gallowsLabel));
 
             // adds the JButton letter to the JPanel guessLetterPanel
             guessLetterPanel.add(letter);
@@ -139,6 +137,15 @@ class ButtonListener implements ActionListener{
         // packs JFrame and setVisible to true
         game.pack();
         game.setVisible(true);
+
+        JFrame rules = new JFrame("Rules");
+        rules.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        ImageIcon rulesImage = new ImageIcon(new ImageIcon("rules.png").getImage().getScaledInstance(600,375,Image.SCALE_DEFAULT));
+        JLabel rulesLabel = new JLabel();
+        rulesLabel.setIcon(rulesImage);
+        rules.add(rulesLabel);
+        rules.setVisible(true);
+        rules.pack();
 
     }
 }
@@ -165,29 +172,7 @@ class WordGuessListener implements ActionListener {
         Guess thisGuess = new Guess(targetWord, guessString);
         boolean result = thisGuess.wordGuess();
 
-        // creates high score JFrame
-        JFrame highScore = new JFrame("High Scores");
-        highScore.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        highScore.getContentPane().setLayout(new BoxLayout(highScore.getContentPane(), BoxLayout.Y_AXIS));
-
-        JLabel hslabel = new JLabel("High Scores");
-        highScore.add(hslabel);
-
-        //creates the grid layout to display high scores
-        JPanel hs = new JPanel();
-        hs.setLayout(new GridLayout(6, 3));
-        JLabel hsname = new JLabel("Name:");
-        JLabel hscore = new JLabel("Score:");
-        JLabel hscategory = new JLabel("Category:");
-        hs.add(hsname);
-        hs.add(hscore);
-        hs.add(hscategory);
-        hs.setVisible(true);
-        highScore.add(hs);
-        highScore.pack();
-        highScore.pack();
-
-        if (result == true) {
+        if (result) {
             JOptionPane.showMessageDialog(null, "The word guess is correct!");
 
             guessWord.removeAll();
@@ -227,17 +212,15 @@ class LetterGuessListener implements ActionListener {
     private ArrayList<String> wrongBank;
     private JPanel wrongLetterBank;
     private JPanel guessWord;
-    private int guessCount;
     private ArrayList<String> currentGuessWord;
     private JLabel gallowsLabel;
 
-    public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, int guessCount, ArrayList<String> currentGuessWord, JLabel gallows) {
+    public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, ArrayList<String> currentGuessWord, JLabel gallows) {
         this.targetWord = targetWord;
         this.guess = guess;
         this.wrongBank = wrong;
         this.wrongLetterBank = wrongLetterBank;
         this.guessWord= guessWord;
-        this.guessCount = guessCount;
         this.currentGuessWord = currentGuessWord;
         this.gallowsLabel = gallows;
     }
@@ -347,10 +330,7 @@ public class Main {
         startMenu.getContentPane().setLayout(new BoxLayout(startMenu.getContentPane(), BoxLayout.Y_AXIS));
 
         JLabel welcome = new JLabel("Welcome to Hangman!");
-        JLabel nameLabel = new JLabel("Name:", SwingConstants.RIGHT);
-        JTextField enteredName = new JTextField();
 
-        // HighScores score = new HighScores(enteredName.getText(),0,"null");
         JLabel categoriesLabel = new JLabel("Select a category");
         JButton animals = new JButton("Animals");
         animals.addActionListener(new ButtonListener("animals.txt", 0));
@@ -382,8 +362,6 @@ public class Main {
         categories.add(challenge);
 
         startMenu.getContentPane().add(welcome);
-        startMenu.getContentPane().add(nameLabel);
-        startMenu.getContentPane().add(enteredName);
         startMenu.getContentPane().add(categoriesLabel);
         startMenu.getContentPane().add(categories);
 
