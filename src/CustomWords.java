@@ -25,7 +25,7 @@ public class CustomWords {
 
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileOutputStream(new File("custom.txt").getAbsolutePath(), true));
+            writer = new PrintWriter(new FileOutputStream(new File("./categories/custom.txt").getAbsolutePath(), true));
             writer.println(word);
             writer.flush();
             writer.close();
@@ -67,14 +67,15 @@ class CustomWordsListener implements ActionListener {
     CustomWords customWordObject;
     JTextField customField;
 
-    public CustomWordsListener(CustomWords customWord, JTextField customField) {
+    public CustomWordsListener(CustomWords customWordObject, JTextField customField) {
         this.customField = customField;
+        this.customWordObject = customWordObject;
     }
 
     // performs this code when the OK JButton is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
-        String customWord = customField.getText();
+        String customWord = null;
 
         try {
             customWord = customField.getText();
