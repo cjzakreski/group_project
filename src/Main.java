@@ -27,131 +27,124 @@ class ButtonListener implements ActionListener{
         // uses Categories method getWord to randomly selected a targetword; stores this targetword as a String
         String targetWord = c.getWord();
 
-        // if filename selected is custom.txt, allow the user to enter a word
-        if (filename.equals("custom.txt")) {
-            CustomWords customWords = new CustomWords();
-            customWords.displayCustomFrame();
-        } else {
-            // JFrame display for the Hangman Game
-            JFrame game = new JFrame("Hangman Game");
-            game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            game.getContentPane().setLayout(new BoxLayout(game.getContentPane(), BoxLayout.Y_AXIS));
+        // JFrame display for the Hangman Game
+        JFrame game = new JFrame("Hangman Game");
+        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.getContentPane().setLayout(new BoxLayout(game.getContentPane(), BoxLayout.Y_AXIS));
 
-            // creates a Gallows image and adds it to a JLabel
-            ImageIcon image = new ImageIcon(new ImageIcon("images/Start.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
-            JLabel gallowsLabel = new JLabel();
-            gallowsLabel.setIcon(image);
+        // creates a Gallows image and adds it to a JLabel
+        ImageIcon image = new ImageIcon(new ImageIcon("images/Start.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+        JLabel gallowsLabel = new JLabel();
+        gallowsLabel.setIcon(image);
 
-            // creates a JPanel for wrong letter guesses
-            JPanel wrongGuessPanel = new JPanel();
-            wrongGuessPanel.setLayout(new GridLayout(6, 5));
-            wrongGuessPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            JLabel wrongAnswer = new JLabel("Wrong Letters"); // JLabel header for wrongGuessPanel
-            wrongGuessPanel.add(wrongAnswer);
+        // creates a JPanel for wrong letter guesses
+        JPanel wrongGuessPanel = new JPanel();
+        wrongGuessPanel.setLayout(new GridLayout(6, 5));
+        wrongGuessPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JLabel wrongAnswer = new JLabel("Wrong Letters"); // JLabel header for wrongGuessPanel
+        wrongGuessPanel.add(wrongAnswer);
 
-            // testing purposes - displays the targetword
-            JLabel target = new JLabel(targetWord);
-            game.getContentPane().add(target);
+        // testing purposes - displays the targetword
+        JLabel target = new JLabel(targetWord);
+        game.getContentPane().add(target);
 
-            // creates a JPanel for guessing a letter
-            JPanel guessLetterPanel = new JPanel();
-            guessLetterPanel.setLayout(new GridLayout(6, 5));
-            guessLetterPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            JLabel alphabetHeader = new JLabel("Guess a letter:"); // JLabel header for guessLetterPanel
-            guessLetterPanel.add(alphabetHeader);
+        // creates a JPanel for guessing a letter
+        JPanel guessLetterPanel = new JPanel();
+        guessLetterPanel.setLayout(new GridLayout(6, 5));
+        guessLetterPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JLabel alphabetHeader = new JLabel("Guess a letter:"); // JLabel header for guessLetterPanel
+        guessLetterPanel.add(alphabetHeader);
 
-            // creates a JPanel for guessing a word
-            JPanel guessWordPanel = new JPanel();
-            guessWordPanel.setLayout(new GridLayout(1, 5));
-            guessWordPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 40, 10));
-            JLabel wordGuessHeader = new JLabel("Guess a word:"); // JLabel header for guessWordPanel
-            JTextField enteredGuess = new JTextField(); // creates a JTextField for the user to enter a word guess
-            String guessString = enteredGuess.getText(); // gets the input (word guess) from JTextField and converts it to a String; stores this as a String
+        // creates a JPanel for guessing a word
+        JPanel guessWordPanel = new JPanel();
+        guessWordPanel.setLayout(new GridLayout(1, 5));
+        guessWordPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 40, 10));
+        JLabel wordGuessHeader = new JLabel("Guess a word:"); // JLabel header for guessWordPanel
+        JTextField enteredGuess = new JTextField(); // creates a JTextField for the user to enter a word guess
+        String guessString = enteredGuess.getText(); // gets the input (word guess) from JTextField and converts it to a String; stores this as a String
 
-            // creates a JPanel for displaying the word guess
-            JPanel displayWordGuess = new JPanel();
-            displayWordGuess.setLayout(new GridLayout(1, 20));
-            displayWordGuess.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            for (int i = 0; i < targetWord.length(); i++) {
-                String targetLetter = Character.toString(targetWord.charAt(i));
-                if (targetLetter.equals(" ")) {
-                    JLabel space = new JLabel(" ");
-                    displayWordGuess.add(space);
-                } else if (targetLetter.equals(guessString)) {
-                    JLabel space = new JLabel(targetLetter);
-                    displayWordGuess.add(space);
-                } else {
-                    JLabel space = new JLabel("*");
-                    displayWordGuess.add(space);
-                }
+        // creates a JPanel for displaying the word guess
+        JPanel displayWordGuess = new JPanel();
+        displayWordGuess.setLayout(new GridLayout(1, 20));
+        displayWordGuess.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        for (int i = 0; i < targetWord.length(); i++) {
+            String targetLetter = Character.toString(targetWord.charAt(i));
+            if (targetLetter.equals(" ")) {
+                JLabel space = new JLabel(" ");
+                displayWordGuess.add(space);
+            } else if (targetLetter.equals(guessString)) {
+                JLabel space = new JLabel(targetLetter);
+                displayWordGuess.add(space);
+            } else {
+                JLabel space = new JLabel("*");
+                displayWordGuess.add(space);
             }
-
-            // ArrayList to store the current state of the guessed words; automatically adds whitespaces
-            ArrayList<String> currentGuessWord = new ArrayList<>();
-
-            for (int i = 0; i < targetWord.length(); i++) {
-                String targetLetter = Character.toString(targetWord.charAt(i));
-                if (targetLetter.equals(" ")) {
-                    currentGuessWord.add(" ");
-                } else {
-                    currentGuessWord.add("*");
-                }
-            }
-
-
-            // creates a JButton to press to guess a word
-            JButton wordGuess = new JButton("Guess Word");
-
-            // adds ActionListener called WordGuessListener that checks if the word guess is correct
-            wordGuess.addActionListener(new WordGuessListener(targetWord, enteredGuess, displayWordGuess, currentGuessWord));
-            guessWordPanel.add(wordGuessHeader);
-            guessWordPanel.add(enteredGuess);
-            guessWordPanel.add(wordGuess);
-
-            // for loop reads through the alphabet String
-            String alphabet = "abcdefghijklmnopqrstuvwxyz";
-            for (int i = 0; i < alphabet.length(); i++) {
-                // creates a String alphabet letter for the given index in the String
-                String alphletter = String.valueOf(alphabet.charAt(i));
-
-                // creates a JButton to press to guess a letter
-                JButton letter = new JButton(alphletter);
-
-                // adds ActionListener called LetterGuessListener that checks if the letter guess is correct
-                letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, currentGuessWord, gallowsLabel));
-
-                // adds the JButton letter to the JPanel guessLetterPanel
-                guessLetterPanel.add(letter);
-            }
-
-            // creates a JPanel display for the gallowsLabel and the wrongGuessPanel
-            JPanel display = new JPanel();
-            display.setLayout(new GridLayout(1, 2));
-            display.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            display.add(gallowsLabel);
-            display.add(wrongGuessPanel);
-
-            // adds all the panels to the Hangman JFrame game - display, displayWordGuess, guessLetterPanel, and guessWordPanel
-            game.getContentPane().add(display);
-            game.getContentPane().add(displayWordGuess);
-            game.getContentPane().add(guessLetterPanel);
-            game.getContentPane().add(guessWordPanel);
-
-            // packs JFrame and setVisible to true
-            game.pack();
-            game.setVisible(true);
-
-            // creates a JFrame of the rules that automatically pops up in front of the Hangman Game
-            JFrame rules = new JFrame("Rules");
-            rules.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            ImageIcon rulesImage = new ImageIcon(new ImageIcon("images/rules.png").getImage().getScaledInstance(600, 375, Image.SCALE_DEFAULT));
-            JLabel rulesLabel = new JLabel();
-            rulesLabel.setIcon(rulesImage);
-            rules.add(rulesLabel);
-            rules.setVisible(true);
-            rules.pack();
         }
 
+        // ArrayList to store the current state of the guessed words; automatically adds whitespaces
+        ArrayList<String> currentGuessWord = new ArrayList<>();
+
+        for (int i = 0; i < targetWord.length(); i++) {
+            String targetLetter = Character.toString(targetWord.charAt(i));
+            if (targetLetter.equals(" ")) {
+                currentGuessWord.add(" ");
+            } else {
+                currentGuessWord.add("*");
+            }
+        }
+
+
+        // creates a JButton to press to guess a word
+        JButton wordGuess = new JButton("Guess Word");
+
+        // adds ActionListener called WordGuessListener that checks if the word guess is correct
+        wordGuess.addActionListener(new WordGuessListener(targetWord, enteredGuess, displayWordGuess, currentGuessWord));
+        guessWordPanel.add(wordGuessHeader);
+        guessWordPanel.add(enteredGuess);
+        guessWordPanel.add(wordGuess);
+
+        // for loop reads through the alphabet String
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        for (int i = 0; i < alphabet.length(); i++) {
+            // creates a String alphabet letter for the given index in the String
+            String alphletter = String.valueOf(alphabet.charAt(i));
+
+            // creates a JButton to press to guess a letter
+            JButton letter = new JButton(alphletter);
+
+            // adds ActionListener called LetterGuessListener that checks if the letter guess is correct
+            letter.addActionListener(new LetterGuessListener(targetWord, alphletter, wrongLetterBank, wrongGuessPanel, displayWordGuess, currentGuessWord, gallowsLabel));
+
+            // adds the JButton letter to the JPanel guessLetterPanel
+            guessLetterPanel.add(letter);
+        }
+
+        // creates a JPanel display for the gallowsLabel and the wrongGuessPanel
+        JPanel display = new JPanel();
+        display.setLayout(new GridLayout(1, 2));
+        display.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        display.add(gallowsLabel);
+        display.add(wrongGuessPanel);
+
+        // adds all the panels to the Hangman JFrame game - display, displayWordGuess, guessLetterPanel, and guessWordPanel
+        game.getContentPane().add(display);
+        game.getContentPane().add(displayWordGuess);
+        game.getContentPane().add(guessLetterPanel);
+        game.getContentPane().add(guessWordPanel);
+
+        // packs JFrame and setVisible to true
+        game.pack();
+        game.setVisible(true);
+
+        // creates a JFrame of the rules that automatically pops up in front of the Hangman Game
+        JFrame rules = new JFrame("Rules");
+        rules.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        ImageIcon rulesImage = new ImageIcon(new ImageIcon("images/rules.png").getImage().getScaledInstance(600, 375, Image.SCALE_DEFAULT));
+        JLabel rulesLabel = new JLabel();
+        rulesLabel.setIcon(rulesImage);
+        rules.add(rulesLabel);
+        rules.setVisible(true);
+        rules.pack();
     }
 }
 
@@ -178,14 +171,12 @@ class WordGuessListener implements ActionListener{
         this.guess = guess;
         this.guessWord = guessWord;
         this.currentGuessWord = currentGuessWord;
-
     }
     @Override
     public void actionPerformed(ActionEvent e){
         String guessString = guess.getText();
         Guess thisGuess = new Guess(targetWord, guessString);
         boolean result = thisGuess.wordGuess();
-
 
         if(result) {
             JOptionPane.showMessageDialog(null, "The word guess is correct!");
@@ -363,7 +354,7 @@ public class Main {
         JButton challenge = new JButton("Challenge");
         challenge.addActionListener(new ButtonListener("challenge.txt"));
         JButton custom = new JButton("Custom");
-        custom.addActionListener(new ButtonListener("custom.txt"));
+        custom.addActionListener(new CustomButtonListener());
 
         JPanel categories = new JPanel();
         categories.setLayout(new GridLayout(3,3));

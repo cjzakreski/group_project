@@ -48,14 +48,17 @@ public class CustomWords {
 
         JLabel customLabel = new JLabel("Enter a word to add: ");
         JTextField customField = new JTextField();
-        JButton okButton = new JButton("Enter and Play Game");
+        JButton okButton = new JButton("Enter");
         okButton.addActionListener(new CustomWordsListener(this, customField));
+        JButton playGameButton = new JButton("Play Game");
+        playGameButton.addActionListener(new ButtonListener("custom.txt"));
 
         customPanel.add(customLabel);
         customPanel.add(customField);
         customPanel.add(okButton);
+        customPanel.add(playGameButton);
 
-        customPanel.setVisible(true);
+        customFrame.add(customPanel);
 
         customFrame.pack();
         customFrame.setVisible(true);
@@ -83,7 +86,6 @@ class CustomWordsListener implements ActionListener {
         } catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
         }
-
 
     }
 }
