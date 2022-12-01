@@ -49,8 +49,10 @@ class ButtonListener implements ActionListener{
         wrongGuessPanel.add(wrongAnswer);
 
         // testing purposes - displays the targetword
+        /*
         JLabel target = new JLabel(targetWord);
         game.getContentPane().add(target);
+         */
 
         // creates a JPanel for guessing a letter
         JPanel guessLetterPanel = new JPanel();
