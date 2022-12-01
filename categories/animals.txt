@@ -25,7 +25,7 @@ parrot
 rooster
 reindeer
 swordfish
-woodpecker
+squid
 skunk
 dolphin
 shark
