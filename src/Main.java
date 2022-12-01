@@ -20,13 +20,17 @@ class ButtonListener implements ActionListener{
     // performs this code when the category JButton is selected
     @Override
     public void actionPerformed(ActionEvent e){
-
+        String targetWord;
         // creates a Categories object; parameter: String of the selected category filename
         Categories c = new Categories(filename);
-
-        // uses Categories method getWord to randomly selected a targetword; stores this targetword as a String
-        String targetWord = c.getWord();
-
+        String source = (e.getSource()).toString();
+        if(filename.contains("custom") && source.contains("Play Game with Word!")){
+            // uses Categories method getCustomWord to get the most recent addition to custom.txt; stores this targetword as a String
+            targetWord = c.getCustomWord();
+        } else {
+            // uses Categories method getWord to randomly select a targetword; stores this targetword as a String
+            targetWord = c.getWord();
+        }
         // JFrame display for the Hangman Game
         JFrame game = new JFrame("Hangman Game");
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -40,5 +40,11 @@ public class Categories {
 
         return targetWord;
     }
+    public String getCustomWord(){
+        int index = (wordList.size())-1;
+        String targetWord = wordList.get(index);
+
+        return targetWord;
+    }
 }
 

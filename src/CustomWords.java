@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class CustomWords {
+    private String word;
     private String filename;
 
     public CustomWords() {
@@ -23,7 +24,7 @@ public class CustomWords {
             System.exit(-1);
         }
 
-        PrintWriter writer = null;
+        PrintWriter writer;
         try {
             writer = new PrintWriter(new FileOutputStream(new File("./categories/custom.txt").getAbsolutePath(), true));
             writer.println(word);
@@ -46,16 +47,19 @@ public class CustomWords {
         customPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         customFrame.getContentPane().add(customPanel);
 
-        JLabel customLabel = new JLabel("Enter a word to add: ");
+        JLabel customLabel = new JLabel("Enter a word to add and press \"Enter Word\": ");
         JTextField customField = new JTextField();
         JButton okButton = new JButton("Enter Word");
         okButton.addActionListener(new CustomWordsListener(this, customField));
-        JButton playGameButton = new JButton("Play Game");
+        JButton randomizeButton = new JButton("Randomize Custom Words!");
+        randomizeButton.addActionListener(new ButtonListener("custom.txt"));
+        JButton playGameButton = new JButton("Play Game with Word!");
         playGameButton.addActionListener(new ButtonListener("custom.txt"));
 
         customPanel.add(customLabel);
         customPanel.add(customField);
         customPanel.add(okButton);
+        customPanel.add(randomizeButton);
         customPanel.add(playGameButton);
 
         customFrame.add(customPanel);
@@ -74,12 +78,10 @@ class CustomWordsListener implements ActionListener {
         this.customField = customField;
         this.customWordObject = customWordObject;
     }
-
     // performs this code when the OK JButton is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
-        String customWord = null;
-
+        String customWord;
         try {
             customWord = customField.getText();
             customWordObject.customAddWord(customWord);
