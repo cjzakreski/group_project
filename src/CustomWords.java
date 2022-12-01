@@ -48,7 +48,7 @@ public class CustomWords {
 
         JLabel customLabel = new JLabel("Enter a word to add: ");
         JTextField customField = new JTextField();
-        JButton okButton = new JButton("Enter");
+        JButton okButton = new JButton("Enter Word");
         okButton.addActionListener(new CustomWordsListener(this, customField));
         JButton playGameButton = new JButton("Play Game");
         playGameButton.addActionListener(new ButtonListener("custom.txt"));
