@@ -144,7 +144,7 @@ class ButtonListener implements ActionListener{
         // creates a JFrame of the rules that automatically pops up in front of the Hangman Game
         JFrame rules = new JFrame("Rules");
         rules.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        ImageIcon rulesImage = new ImageIcon(new ImageIcon("images/rules.png").getImage().getScaledInstance(600, 375, Image.SCALE_DEFAULT));
+        ImageIcon rulesImage = new ImageIcon(new ImageIcon("images/rules.png").getImage().getScaledInstance(686, 584, Image.SCALE_DEFAULT));
         JLabel rulesLabel = new JLabel();
         rulesLabel.setIcon(rulesImage);
         rules.add(rulesLabel);
@@ -333,7 +333,7 @@ class LetterGuessListener implements ActionListener {
             pause();
         } else if(wrongBank.size() == 6){
             // if the user reached the six wrong guess limit, the game ends and closes
-            JOptionPane.showMessageDialog(null, "Better luck next time!");
+            JOptionPane.showMessageDialog(null, "The correct word was: " + targetWord.toUpperCase() + ". Better luck next time!");
             pause();
         }
     }
