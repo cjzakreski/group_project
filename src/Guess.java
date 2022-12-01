@@ -1,4 +1,3 @@
-
 // used to check the letter guess or word guess
 public class Guess {
     private String targetWord;
