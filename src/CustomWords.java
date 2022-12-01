@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
 
+// used to interact with the "Custom" JButton
 public class CustomWords {
     private String word;
     private String filename;
 
+    // set the filename to custom.txt
     public CustomWords() {
         this.filename = "custom.txt";
     }
@@ -69,21 +70,27 @@ public class CustomWords {
     }
 }
 
+// class CustomWordsListener is used when Enter Word JButton is selected
 class CustomWordsListener implements ActionListener {
     // constructor is blank
     CustomWords customWordObject;
     JTextField customField;
 
+    // takes CustomWords object parameter and JTextField parameter
     public CustomWordsListener(CustomWords customWordObject, JTextField customField) {
         this.customField = customField;
         this.customWordObject = customWordObject;
     }
-    // performs this code when the OK JButton is clicked
+
+    // performs this code when the Enter Word JButton is selected
     @Override
     public void actionPerformed(ActionEvent e) {
         String customWord;
         try {
+            // converts the JTextField into a String
             customWord = customField.getText();
+
+            // adds the custom word to the custom.txt file
             customWordObject.customAddWord(customWord);
         } catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);

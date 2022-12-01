@@ -10,7 +10,7 @@ class ButtonListener implements ActionListener{
     private ArrayList<String> wrongLetterBank;
 
 
-    // constructor takes parameter: filename; initializes the ArrayList wrongLetterBank
+    // constructor takes filename parameter; initializes the ArrayList wrongLetterBank
     public ButtonListener(String fileName){
         this.filename = fileName;
         this.wrongLetterBank = new ArrayList<>();
@@ -154,6 +154,7 @@ class ButtonListener implements ActionListener{
     }
 }
 
+// class CustomButtonListener is used when the custom JButton is selected
 class CustomButtonListener implements ActionListener{
 
     // performs this code when the custom JButton is selected
@@ -165,6 +166,7 @@ class CustomButtonListener implements ActionListener{
 }
 
 
+// class WordGuessListener is used when the Guess Word JButton is selected
 class WordGuessListener implements ActionListener{
     private String targetWord;
     private JTextField guess;
@@ -172,39 +174,47 @@ class WordGuessListener implements ActionListener{
     private ArrayList<String> currentGuessWord;
 
 
+    // passes in parameters needed to perform calculations or needed to update
     public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord){
         this.targetWord = targetWord;
         this.guess = guess;
         this.guessWord = guessWord;
         this.currentGuessWord = currentGuessWord;
     }
+
+    // performs this code when the Word Guess JButton is selected
     @Override
     public void actionPerformed(ActionEvent e){
         String guessString = guess.getText();
         Guess thisGuess = new Guess(targetWord, guessString);
         boolean result = thisGuess.wordGuess();
 
+        // if the result is true, the word guess is correct
         if(result) {
             JOptionPane.showMessageDialog(null, "The word guess is correct!");
 
             guessWord.removeAll();
+
             // checks if current guess word is the target word
             if(guessString.equals(targetWord)) {
                 JOptionPane.showMessageDialog(null, "You win!");
                 pause();
             }
 
+            // turns the guess word display into the correctly guessed target word
             for(int a=0;a<targetWord.length();a++) {
                 JLabel letter = new JLabel(Character.toString(targetWord.charAt(a)));
                 guessWord.add(letter);
             }
             guessWord.revalidate();
             guessWord.repaint();
-        } else {
+        } else { // if the result is false, the word guess is incorrect
             JOptionPane.showMessageDialog(null, "The word guess is incorrect!");
         }
 
     }
+
+    // used to "pause" the program before the Hangman Game window closes
     public void pause(){
         try{
             Thread.sleep(1000);
@@ -213,6 +223,7 @@ class WordGuessListener implements ActionListener{
     }
 }
 
+// class LetterGuessListener is used when a letter JButton is selected
 class LetterGuessListener implements ActionListener {
     private String targetWord;
     private String guess;
@@ -222,6 +233,7 @@ class LetterGuessListener implements ActionListener {
     private ArrayList<String> currentGuessWord;
     private JLabel gallowsLabel;
 
+    // passes in parameters needed to perform calculations or needed to update
     public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, ArrayList<String> currentGuessWord, JLabel gallows) {
         this.targetWord = targetWord;
         this.guess = guess;
@@ -232,35 +244,37 @@ class LetterGuessListener implements ActionListener {
         this.gallowsLabel = gallows;
     }
 
+    // performs this code when a letter JButton is selected
     @Override
     public void actionPerformed(ActionEvent e) {
 
         Guess thisGuess = new Guess(targetWord, guess);
         boolean result = thisGuess.letterGuess();
-        if (result == true) {
+        if (result == true) { // the letter guess is correct
             JOptionPane.showMessageDialog(null, "The letter guess is correct!");
-        } else {
+        } else { // the letter guess is incorrect
             JOptionPane.showMessageDialog(null, "The letter guess is incorrect!");
             wrongBank.add(guess);
 
+            // clears the gallows label
             gallowsLabel.removeAll();
 
-            if(wrongBank.size() == 1){
+            if(wrongBank.size() == 1){ // one letter guessed wrong
                 ImageIcon one = new ImageIcon(new ImageIcon("images/First Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(one);
-            } else if(wrongBank.size() == 2) {
+            } else if(wrongBank.size() == 2) { // two letters guessed wrong
                 ImageIcon two = new ImageIcon(new ImageIcon("images/Second Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(two);
-            } else if(wrongBank.size() == 3) {
+            } else if(wrongBank.size() == 3) {  // three letters guessed wrong
                 ImageIcon three = new ImageIcon(new ImageIcon("images/Third Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(three);
-            } else if(wrongBank.size() == 4) {
+            } else if(wrongBank.size() == 4) { // four letters guessed wrong
                 ImageIcon four = new ImageIcon(new ImageIcon("images/Fourth Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(four);
-            } else if(wrongBank.size() == 5) {
+            } else if(wrongBank.size() == 5) { // five letters guessed wrong
                 ImageIcon five = new ImageIcon(new ImageIcon("images/Fifth Wrong.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(five);
-            } else if (wrongBank.size() == 6){
+            } else if (wrongBank.size() == 6){ // six letters guessed wrong
                 ImageIcon six = new ImageIcon(new ImageIcon("images/Game OVer.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
                 gallowsLabel.setIcon(six);
             }
@@ -277,6 +291,7 @@ class LetterGuessListener implements ActionListener {
         JLabel wrongAnswer = new JLabel("Wrong Letters");
         wrongLetterBank.add(wrongAnswer);
 
+        // adds all the updated wrong letter guesses to the display
         for(int i=0;i<wrongBank.size();i++) {
             JLabel wrongLett = new JLabel(wrongBank.get(i));
             wrongLetterBank.add(wrongLett);
@@ -323,6 +338,8 @@ class LetterGuessListener implements ActionListener {
             pause();
         }
     }
+
+    // used to "pause" the program before the Hangman Game window closes
     public void pause(){
         try{
             Thread.sleep(1000);
@@ -331,6 +348,8 @@ class LetterGuessListener implements ActionListener {
     }
 }
 
+
+// used to first initialize the Hangman Game Start Menu
 public class Main {
 
     public static void main(String[] args) {
