@@ -2,21 +2,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+/**
+ * This program plays a round of hangman with either set categories or custom words that the user inputs.
+ * @version 1.0
+ * @author Selby Heyman
+ * @author Abigail Wallace
+ * @author Cameron Zakreski
+ */
 
-// class ButtonListener is used when a category JButton is selected
+/**
+ * This class is the primary code for running a complete hangman game once a category is selected.
+ */
 class ButtonListener implements ActionListener{
     private String filename;
     private ArrayList<String> wrongLetterBank;
 
 
-    // constructor takes filename parameter; initializes the ArrayList wrongLetterBank
+    /**
+     * Initializes the ArrayList for wrong letters
+     * @param fileName the name of the category words
+     */
     public ButtonListener(String fileName){
         this.filename = fileName;
         this.wrongLetterBank = new ArrayList<>();
 
     }
 
-    // performs this code when the category JButton is selected
+    /**
+     * Begins the hangman game when certain buttons are pressed.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         String targetWord;
@@ -154,9 +169,16 @@ class ButtonListener implements ActionListener{
 }
 
 // class CustomButtonListener is used when the custom JButton is selected
+
+/**
+ * This class connects to the CustomWords class when the user opts for the Custom Word category.
+ */
 class CustomButtonListener implements ActionListener{
 
-    // performs this code when the custom JButton is selected
+    /**
+     * Creates a new CustomWord Object and displays the frame to enter custom words.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         CustomWords customWords = new CustomWords();
@@ -165,15 +187,22 @@ class CustomButtonListener implements ActionListener{
 }
 
 
-// class WordGuessListener is used when the Guess Word JButton is selected
+/**
+ * This class checks if the word the user inputted matches the target word when they opt to guess a whole word.
+ */
 class WordGuessListener implements ActionListener{
     private String targetWord;
     private JTextField guess;
     private JPanel guessWord;
     private ArrayList<String> currentGuessWord;
 
-
-    // passes in parameters needed to perform calculations or needed to update
+    /**
+     * This method sets up the targetWord, guess test field, guessWord, and ArrayList of letters in the currentGuessWord.
+     * @param targetWord the word that is meant to be guessed.
+     * @param guess the text field where the text was entered.
+     * @param guessWord the guess that the user inputted.
+     * @param currentGuessWord the ArrayList of letters in the guessed word.
+     */
     public WordGuessListener(String targetWord, JTextField guess, JPanel guessWord, ArrayList<String> currentGuessWord){
         this.targetWord = targetWord;
         this.guess = guess;
@@ -181,7 +210,10 @@ class WordGuessListener implements ActionListener{
         this.currentGuessWord = currentGuessWord;
     }
 
-    // performs this code when the Word Guess JButton is selected
+    /**
+     * This method calculates whether the user entered the correct word and ends the game if they did
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         String guessString = guess.getText();
@@ -213,7 +245,9 @@ class WordGuessListener implements ActionListener{
 
     }
 
-    // used to "pause" the program before the Hangman Game window closes
+    /**
+     * This method is used to "pause" the program before the Hangman Game window closes
+     */
     public void pause(){
         try{
             Thread.sleep(1000);
@@ -222,7 +256,9 @@ class WordGuessListener implements ActionListener{
     }
 }
 
-// class LetterGuessListener is used when a letter JButton is selected
+/**
+ * This class checks if the letter selected by the user is present in the target word
+ */
 class LetterGuessListener implements ActionListener {
     private String targetWord;
     private String guess;
@@ -232,7 +268,16 @@ class LetterGuessListener implements ActionListener {
     private ArrayList<String> currentGuessWord;
     private JLabel gallowsLabel;
 
-    // passes in parameters needed to perform calculations or needed to update
+    /**
+     * This method passes in parameters needed to perform calculations or needed to update
+     * @param targetWord the word that is trying to be guessed
+     * @param guess the letter that is guessed by the user
+     * @param wrong the ArrayList of wrong letters
+     * @param wrongLetterBank the GUI panel which displays incorrect letters
+     * @param guessWord the GUI panel that displays the asterisks and correct letters
+     * @param currentGuessWord the ArrayList which tracks which letters are correct and which are still unknown
+     * @param gallows the GUI label which displays the gallows
+     */
     public LetterGuessListener(String targetWord, String guess, ArrayList<String> wrong, JPanel wrongLetterBank, JPanel guessWord, ArrayList<String> currentGuessWord, JLabel gallows) {
         this.targetWord = targetWord;
         this.guess = guess;
@@ -243,7 +288,11 @@ class LetterGuessListener implements ActionListener {
         this.gallowsLabel = gallows;
     }
 
-    // performs this code when a letter JButton is selected
+    /**
+     * Creates a Guess object to determine if the letter guessed is within the target word and then updates the word or the
+     * gallows/wrong letter display as necessary
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -282,7 +331,6 @@ class LetterGuessListener implements ActionListener {
 
         }
 
-
         // clears the display for the wrong letters
         wrongLetterBank.removeAll();
 
@@ -316,8 +364,6 @@ class LetterGuessListener implements ActionListener {
         guessWord.revalidate();
         guessWord.repaint();
 
-
-
         // turns the ArrayList of current guess word into a String
         String currentGuessWordString = "";
 
@@ -338,7 +384,9 @@ class LetterGuessListener implements ActionListener {
         }
     }
 
-    // used to "pause" the program before the Hangman Game window closes
+    /**
+     * This method is used to "pause" the program before the Hangman Game window closes
+     */
     public void pause(){
         try{
             Thread.sleep(1000);
@@ -348,7 +396,9 @@ class LetterGuessListener implements ActionListener {
 }
 
 
-// used to first initialize the Hangman Game Start Menu
+/**
+ * This class instantiates the initial hangman game start menu which lists categories and routes the selected category to the appropriate button listener
+ */
 public class Main {
 
     public static void main(String[] args) {

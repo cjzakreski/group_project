@@ -1,15 +1,24 @@
-// used to check the letter guess or word guess
+/**
+ * This guess is used to check whether guesses are correct
+ */
 public class Guess {
     private String targetWord;
     private String guess;
 
-    // takes the targetWord and the guess as parameters
+    /**
+     * this constructor sets the targetWord and the guess and the ones that the user is currently dealing with
+     * @param targetWord the word the user is trying to guess
+     * @param guess The letter or word that the user most recently guessed
+     */
     public Guess(String targetWord, String guess) {
         this.targetWord = targetWord;
         this.guess = guess;
     }
 
-    // returns whether the targetWord contains the letter guess (true if it does; false if it does not)
+    /**
+     * This method checks whether the guessed letter is in the word
+     * @return true if the letter was found, false if it was not
+     */
     public boolean letterGuess() {
         if(targetWord.contains(guess)) {
             return true;
@@ -18,9 +27,12 @@ public class Guess {
         }
     }
 
-    // returns whether the targetWord is the word guess (true if it is; false if it is not)
+    /**
+     * This method checks whether the guessed word matches the target word
+     * @return true if the words are the same, false otherwise
+     */
     public boolean wordGuess() {
-        if(targetWord.equals(guess)) {
+        if(targetWord.equals(guess.toLowerCase())) {
             return true;
         } else {
             return false;

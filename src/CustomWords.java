@@ -4,17 +4,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-// used to interact with the "Custom" JButton
+/**
+ * This class is used to add custom words to the game
+ */
 public class CustomWords {
     private String word;
     private String filename;
 
-    // set the filename to custom.txt
+    /**
+     * This method makes sure the custom.txt file is being used
+     */
     public CustomWords() {
         this.filename = "custom.txt";
     }
 
-    // writes the word into the custom.txt text file
+    /**
+     * This method appends the word entered by the user to the end of the file
+     * @param word the word to be added
+     * @throws FileNotFoundException if the custom.txt file does not exist
+     */
     public void customAddWord(String word) throws FileNotFoundException {
         FileReader reader = null;
         try {
@@ -36,7 +44,9 @@ public class CustomWords {
         }
     }
 
-    // creates custom word JFrame which allows the user to enter a word to guess before starting the game
+    /**
+     * This method sets up a display to enter one or more custom words and then play the game with custom words
+     */
     public void displayCustomFrame() {
         JFrame customFrame = new JFrame("Enter Custom Words");
 
@@ -70,19 +80,28 @@ public class CustomWords {
     }
 }
 
-// class CustomWordsListener is used when Enter Word JButton is selected
+/**
+ * Used when the Enter Word button is pressed to get the word from the text field
+ */
 class CustomWordsListener implements ActionListener {
     // constructor is blank
     CustomWords customWordObject;
     JTextField customField;
 
-    // takes CustomWords object parameter and JTextField parameter
+    /**
+     * This method sets up the text field and custom word object to create a new object
+     * @param customWordObject the new Object that will be created to add it to the class
+     * @param customField the text field that the word was entered in
+     */
     public CustomWordsListener(CustomWords customWordObject, JTextField customField) {
         this.customField = customField;
         this.customWordObject = customWordObject;
     }
 
-    // performs this code when the Enter Word JButton is selected
+    /**
+     * This method pulls the text from the text field and calls the customAddWord method to place it in the file
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String customWord;

@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-// used to interact with the categories folder and its .txt files
+/**
+ * This class pulls words from categories files and selects the word that will be used in the game
+ */
 public class Categories {
     private String filename;
     private FileReader reader;
     private ArrayList<String> wordList;
 
-    // constructor takes a filename parameter
+    /**
+     * This method pulls all the words/phrases from a file and adds them to an array list
+     * @param filename the selected category that the words will be pulled from
+     */
     public Categories(String filename) {
         this.filename = filename;
         this.wordList = new ArrayList<>();
@@ -35,7 +40,10 @@ public class Categories {
         }
     }
 
-    // gets a randomized word from the selected category filename
+    /**
+     * This method gets a random word from the ArrayList of potential words/phrases
+     * @return the selected random word
+     */
     public String getWord() {
         Random rand = new Random();
         int upper = wordList.size();
@@ -45,7 +53,10 @@ public class Categories {
         return targetWord;
     }
 
-    // gets the word most recently entered to the custom.txt file
+    /**
+     * This method gets the word most recently entered to the custom.txt file when the user says they wish to play with a specific word.
+     * @return the most recent addition to the custom.txt file
+     */
     public String getCustomWord(){
         int index = (wordList.size())-1;
         String targetWord = wordList.get(index);
